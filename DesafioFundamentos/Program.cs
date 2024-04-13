@@ -1,59 +1,50 @@
 ﻿using DesafioFundamentos.Models;
 
-// Coloca o encoding para UTF8 para exibir acentuação
-Console.OutputEncoding = System.Text.Encoding.UTF8;
 
-decimal precoInicial = 0;
-decimal precoPorHora = 0;
+Console.WriteLine("Seja bem vindo ao sistema de estacionamento!");
+Console.WriteLine("Digite o preço inicial");
+string precoInicial = Console.ReadLine();
+Console.WriteLine("Digite o preço por hora");
+string precoPorHora = Console.ReadLine();
 
-Console.WriteLine("Seja bem vindo ao sistema de estacionamento!\n" +
-                  "Digite o preço inicial:");
-precoInicial = Convert.ToDecimal(Console.ReadLine());
+Estacionamento estacionamento = new Estacionamento(Convert.ToDecimal(precoInicial), Convert.ToDecimal(precoPorHora));
 
-Console.WriteLine("Agora digite o preço por hora:");
-precoPorHora = Convert.ToDecimal(Console.ReadLine());
+    string opcao = string.Empty;
 
-// Instancia a classe Estacionamento, já com os valores obtidos anteriormente
-Estacionamento es = new Estacionamento(precoInicial, precoPorHora);
+    bool repeticao = true;
 
-string opcao = string.Empty;
-bool exibirMenu = true;
+    while (repeticao)
 
-// Realiza o loop do menu
-while (exibirMenu)
-{
-    Console.Clear();
-    Console.WriteLine("Digite a sua opção:");
-    Console.WriteLine("1 - Cadastrar veículo");
-    Console.WriteLine("2 - Remover veículo");
-    Console.WriteLine("3 - Listar veículos");
-    Console.WriteLine("4 - Encerrar");
-
-    switch (Console.ReadLine())
     {
-        case "1":
-            es.AdicionarVeiculo();
-            break;
+        Console.Clear();
+        Console.WriteLine("Digite a sua opção: \n 1 - Cadastrar veículo \n 2 - Remover veículo \n 3 - Listar veículos \n 4 - Encerrar");
 
-        case "2":
-            es.RemoverVeiculo();
-            break;
+        opcao = Console.ReadLine();
 
-        case "3":
-            es.ListarVeiculos();
+        switch(opcao)
+        {
+            case "1":
+            estacionamento.AdicionarVeiculo();
             break;
-
-        case "4":
-            exibirMenu = false;
+            case "2":
+            estacionamento.RemoverVeiculo();
             break;
-
-        default:
+            case "3":
+            estacionamento.ListarVeiculos();
+            break;
+            case "4":
+            repeticao = false;
+            break;
+            default:
             Console.WriteLine("Opção inválida");
             break;
-    }
+        }
 
     Console.WriteLine("Pressione uma tecla para continuar");
     Console.ReadLine();
-}
 
-Console.WriteLine("O programa se encerrou");
+    }
+
+    
+
+
